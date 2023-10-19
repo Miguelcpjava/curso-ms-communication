@@ -5,3 +5,4 @@ Projeto para praticar a comunicação entre microservices usando:
 - RabbitMQ
 - Mysql
 - Redis
+- Consul
