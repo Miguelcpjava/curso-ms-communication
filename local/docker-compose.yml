@@ -1,18 +1,33 @@
 version: '3.3'
 
 services:
+  rabbit-server:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit1"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq1"
+    volumes:
+      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
   db:
     image: mysql
     volumes:
-      - dbdata:/var/lib/mysql
+      - /var/lib/mysql
     restart: always
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: userroot
+      MYSQL_DATABASE: banco
+      MYSQL_USER: userroot
+      MYSQL_PASSWORD: userroot
+    command: ["--bind-address=0.0.0.0"]
 
 volumes:
   dbdata:

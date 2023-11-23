@@ -4,10 +4,11 @@ package br.com.ms.communication.bank.gateway.repository;
 import br.com.ms.communication.bank.domain.Cartao;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.Repository;
 
 import java.math.BigDecimal;
 
-public interface CartaoRepository {
+public interface CartaoRepository extends Repository<Cartao, Long>{
 
     @Query("select count(obj.id) from Cartao obj where obj.codigoSegurancaCartao = ?1 and obj.nroCartao = ?2")
     Integer findCartaoValido(Integer codigoSegurancaCartao, Integer nroCartao);
